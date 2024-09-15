@@ -1,0 +1,49 @@
+<title>Login</title>
+
+{% include 'navbar.html' %}
+
+<style>
+    .form-register {
+        max-width: 600px; /* Set a maximum width for the form */
+        margin: auto; /* Center the form horizontally */
+        padding: 15px;
+    }
+
+    .form-control {
+        width: 100%; /* Make input fields 100% of the form's width */
+        max-width: 600px; /* Set a maximum width for the inputs */
+        margin: 2px auto; /* Add margin between inputs and center them */
+    }
+
+    img {
+        max-width: 150px; /* Set a maximum width for the logo */
+        margin-bottom: 20px; /* Add space below the logo */
+    }
+</style>
+
+<body class="text-center">
+    <div class="container">
+        <form method="POST" class="form-register" style="color:white">
+            {{ form.hidden_tag() }}
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please Login
+            </h1>
+     
+            {{ form.email.label() }}
+            {{ form.email(class="form-control", placeholder="Email") }}
+    
+            {{ form.password.label() }}
+            {{ form.password(class="form-control", placeholder="Password") }}
+
+            <br>
+
+            {{ form.submit(class="btn btn-lg btn-primary btn-custom-width") }}
+
+            <div class="checkbox mb-3">
+                <h6>Do not have an account</h6>
+                <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">Register</a>
+            </div>
+
+        </form>
+    </div>
+</body>
