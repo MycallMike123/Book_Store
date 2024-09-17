@@ -14,12 +14,20 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
+    budget = db.Column(db.Integer(), nullable=False, default=1500)
 
     # Relationship to Book model
     books = db.relationship('Book', backref='owner', lazy=True)
 
     def __repr__(self):
         return f"<User {self.username}>"
+
+    @property
+    def prettier_budget(self):
+        if len(str(self.budget)) >= 4:
+            return f'{str(self.budget)[:-3]},{str(self.budget)[-3:]}$'
+        else:
+            return f"{self.budget}$"
     
     @property
     def password(self):
@@ -40,6 +48,7 @@ class Book(db.Model):
     barcode = db.Column(db.String(20), unique=True, nullable=False)
     title = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    description = db.Column(db.Text, nullable=True)
 
     # Foreign key to the User table
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, FloatField, TextAreaField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from bookstore.models import User
 
@@ -24,3 +24,13 @@ class LoginForm(FlaskForm):
     email = StringField(label='Email:', validators=[DataRequired()])
     password = PasswordField(label='Password:', validators=[DataRequired()])
     submit = SubmitField(label='Login')
+
+class PurchaseBookForm(FlaskForm):
+    submit = SubmitField(label='Purchase Book!')
+
+class AddBookForm(FlaskForm):
+    barcode = StringField('Barcode', validators=[DataRequired(), Length(min=10, max=20)])
+    title = StringField('Title', validators=[DataRequired(), Length(min=2, max=100)])
+    price = FloatField('Price', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[Length(max=1000)])
+    submit = SubmitField('Add Book')
