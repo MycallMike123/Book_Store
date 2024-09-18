@@ -1,13 +1,86 @@
-<title>Home</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+        }
 
-{% include 'navbar.html' %}
+        .position-relative {
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.7); /* Optional: semi-transparent background for better text readability */
+            padding: 50px;
+        }
 
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark" style="color: white">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">TechWeb Bookstore</h1>
-        <p class="lead font-weight-normal">Start purchasing books by clicking the link below</p>
-        <a class="btn btn-primary" href="{{ url_for('book_store') }}">Get Started</a>
+        .about-us {
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .gallery img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .store-description {
+            text-align: center;
+            margin: 0 auto;
+            max-width: 600px;  /* Adjust width for readability */
+            padding: 20px;
+            font-size: 18px;   /* Adjust font size if needed */
+            line-height: 1.6;  /* Improves readability */
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <!-- Main content -->
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-white">
+        <!-- About Us Section -->
+        <div class="about-us">
+            <h2>About TechWeb Bookstore</h2>
+            <p>
+                <div class="store-description">
+                    Welcome to TechWeb Bookstore! We specialize in offering the best collection of tech and programming books, ranging from beginner guides to expert-level resources. 
+                Our mission is to provide knowledge that empowers developers, engineers, and tech enthusiasts to advance their careers and skills. Explore our carefully curated selection, and join us in the journey of lifelong learning!
+                </div>
+            </p>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery">
+            <img src="{{ url_for('static', filename='images/book1.jpg') }}" alt="Book 1">
+            <img src="{{ url_for('static', filename='images/book2.jpg') }}" alt="Book 2">
+            <img src="{{ url_for('static', filename='images/book3.jpg') }}" alt="Book 3">
+        </div>
+
+        <!-- Existing Start Section -->
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 font-weight-normal">TechWeb Bookstore</h1>
+            <p class="lead font-weight-normal">Start purchasing books by clicking the link below</p>
+            <a class="btn btn-primary" href="{{ url_for('book_store') }}">Get Started</a>
+        </div>
     </div>
-    <div class="product-device box-shadow d-none d-md-block"></div>
-    <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
-</div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

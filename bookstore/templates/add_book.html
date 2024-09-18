@@ -1,12 +1,22 @@
-<title>Add a book</title>
+<title>Add a Book</title>
 
 {% include 'navbar.html' %}
 
 <style>
+    body {
+        background-image: url("{{ url_for('static', filename='images/background.jpg') }}"); /* Path to your background image */
+        background-size: cover; /* Ensure the background covers the whole page */
+        background-position: center; /* Center the background image */
+        background-repeat: no-repeat; /* Prevent the image from repeating */
+        background-color: rgba(0, 0, 0, 0.8); /* Optional: fallback background color */
+    }
+
     .form-register {
         max-width: 600px; /* Set a maximum width for the form */
         margin: auto; /* Center the form horizontally */
         padding: 15px;
+        background-color: rgba(0, 0, 0, 0.8); /* Dark background for the form */
+        border-radius: 10px; /* Add rounded corners */
     }
 
     .form-control {
@@ -19,31 +29,36 @@
         max-width: 150px; /* Set a maximum width for the logo */
         margin-bottom: 20px; /* Add space below the logo */
     }
+
+    h1, h6, label, a {
+        color: white; /* Ensure all text is readable over the dark background */
+    }
 </style>
 
 <body class="text-center">
     <div class="container">
-        <form method="POST" class="form-register" style="color:white">
-        {{ form.hidden_tag() }}
-        <h1 class="h3 mb-3 font-weight-normal">
-            Please add a book to sell
-        </h1>
+        <form method="POST" class="form-register">
+            {{ form.hidden_tag() }}
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please add a book to sell
+            </h1>
 
-        {{ form.barcode.label(class="form-label") }}
-        {{ form.barcode(class="form-control", placeholder="Barcode") }}
+            {{ form.barcode.label(class="form-label") }}
+            {{ form.barcode(class="form-control", placeholder="Barcode") }}
 
-        {{ form.title.label(class="form-label") }}
-        {{ form.title(class="form-control", placeholder="Title") }}
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control", placeholder="Title") }}
 
-        {{ form.price.label(class="form-label") }}
-        {{ form.price(class="form-control", placeholder="Price") }}
+            {{ form.price.label(class="form-label") }}
+            {{ form.price(class="form-control", placeholder="Price") }}
 
-        {{ form.description.label(class="form-label") }}
-        {{ form.description(class="form-control", placeholder="Description") }}
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(class="form-control", placeholder="Description") }}
 
-        <br>
+            <br>
 
-        {{ form.submit(class="btn btn-lg btn-primary btn-custom-width") }}
-    </form>
-</div>
+            {{ form.submit(class="btn btn-lg btn-primary btn-custom-width") }}
+        </form>
+    </div>
+    {% include 'footer.html' %}
 </body>

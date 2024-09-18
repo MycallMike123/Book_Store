@@ -9,11 +9,13 @@ from flask_login import login_user, logout_user, current_user, login_required
 @app.route('/home')
 def home_page():
     return render_template('home.html')
+from flask_login import login_required
 
 @app.route('/bookstore', methods=['GET', 'POST'])
 def book_store():
     purchase_form = PurchaseBookForm()
 
+    # Only allow purchase if the user is authenticated
     if request.method == "POST" and current_user.is_authenticated:
         purchased_book = request.form.get('purchased_book')
         p_item_object = Book.query.filter_by(title=purchased_book).first()
@@ -29,6 +31,9 @@ def book_store():
                 flash('Insufficient budget to purchase this book.', 'danger')
         else:
             flash('Book not found.', 'warning')
+    elif request.method == "POST":
+        flash("You need to log in to purchase a book!", category='danger')
+        return redirect(url_for('login_page'))
 
     books = Book.query.all()
     users = User.query.all()
